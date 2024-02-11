@@ -1,31 +1,38 @@
-import React, { useState } from 'react'
-import hogs from "../porkers_data";
-import HogDetails from './HogDetails';
+import React, { useState } from 'react';
 import HogTile from './HogTile';
 
-function HogsContainer( { hogs }) {
+function HogsContainer ({ hogs, onPointerMove , onPointerLeave }) {
+  const [showHogs, setShowHogs] = useState(true);
 
+  const handlePointerMove = () => {
+    setShowHogs(false);
+  };
 
-    const mappedHogs = hogs.map((hog) => {
-  
-        return (
-        <HogTile 
-        key={hog.name}
-        name={hog.name}
-        specialty={hog.specialty}
-        greased={hog.greased}
-        weight={hog.weight}
-        image={hog.image}
-        medalStatus={hog["highest medal achieved"]}
-        />
-      )})
+  const handlePointerLeave = () => {
+    setShowHogs(true);
+  };
 
-    return (
-        <div className="ui grid container">
-        {mappedHogs}
-        </div>
-    );
+  const mappedHogs = hogs.map((hog) => (
+    <HogTile
+      key={hog.name}
+      name={hog.name}
+      specialty={hog.specialty}
+      greased={hog.greased}
+      weight={hog.weight}
+      image={hog.image}
+      medalStatus={hog["highest medal achieved"]}
+    />
+  ));
+
+  return (
+    <div
+      className="ui grid container"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+    >
+      {showHogs && mappedHogs}
+    </div>
+  );
 }
 
-
-export default HogsContainer
+export default HogsContainer;

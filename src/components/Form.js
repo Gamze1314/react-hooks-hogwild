@@ -1,13 +1,14 @@
 import React from 'react'
 import { Button , Checkbox } from 'semantic-ui-react'
 
+
 function Form() {
   return (
     <div >
       Add a Piggy!
       <form className="form-container">
         <div className="form-group">
-        <label htmlFor="name">Hog Name</label>
+        <label htmlFor="name">Name</label>
         <input 
         type="text" 
         name="name" 
